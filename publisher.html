@@ -1,0 +1,49 @@
+<html>
+
+<head>
+ <title>
+   New Publisher
+ </title>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<script>
+// contact
+
+
+</script>
+
+</head>
+<body>
+
+
+<h1> Add new Publisher</h1>
+
+name: <input type="text" id="name_pub" value="" /> <br>
+location: <input type="text" id="location_pub" value="" /> <br>
+year: <input type="text" id="year_pub" value="" /> <br>
+
+
+ <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 text-center">
+              <label for="exampleInputEmail1"><i>Logo</i></label>
+               <br>
+               <img  src="" alt="Image preview" id="preview" style="width:128px;height:128px;" >
+               <br>
+               <input type="text" id="url_photo">
+               <br><input onchange="uploadDemo()" type="file"  id="uploaded_file" name="uploaded_file">
+              </div>
+
+<br>
+<button onclick="addPublisher()"> Add </button> 
+
+<br>
+<br>
+
+<button onclick="GoBack()"> Go Back </button>
+
+<script src="app/publisher.js"></script>
+
+
+
+</body>
+</html>
