@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import endpoints
 from google.appengine.ext import ndb
 from google.appengine.api import app_identity

@@ -1,3 +1,5 @@
+# coding=utf-8
+
 import base64
 import Crypto
 from Crypto.Hash import SHA256

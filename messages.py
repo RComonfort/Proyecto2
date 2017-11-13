@@ -1,3 +1,5 @@
+# coding=utf-8
+
 from protorpc import messages
 from protorpc import message_types
 

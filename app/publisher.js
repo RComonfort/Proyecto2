@@ -27,7 +27,7 @@ function addPublisher()
 
   	 jQuery.ajax({
            type: "POST",
-           url: "http://localhost:8080/_ah/api/publishers_api/v1/publishers/insert",
+           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/publishers_api/v1/publishers/insert",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -72,7 +72,7 @@ function getPublisherList()
 
      jQuery.ajax({
            type: "POST",
-           url: "http://localhost:8080/_ah/api/publishers_api/v1/publishers/list",
+           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/publishers_api/v1/publishers/list",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -108,7 +108,7 @@ function uploadDemo()
     try
     {
      $.ajax({
-                url: "http://localhost:8080/up",
+                url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/up",
                 dataType: 'text',
                 cache: false,
                 contentType: false,

@@ -23,7 +23,7 @@ function addGenre()
 
   	 jQuery.ajax({
            type: "POST",
-           url: "http://localhost:8080/_ah/api/genres_api/v1/genres/insert",
+           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/insert",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -68,7 +68,7 @@ function getGenresList()
 
      jQuery.ajax({
            type: "POST",
-           url: "http://localhost:8080/_ah/api/genres_api/v1/genres/list",
+           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/list",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -104,7 +104,7 @@ function uploadDemo()
     try
     {
      $.ajax({
-                url: "http://localhost:8080/up",
+                url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/up",
                 dataType: 'text',
                 cache: false,
                 contentType: false,

@@ -4,15 +4,22 @@ function getData()
 	sessionStorage.empresa = "kubeet";
 
     jQuery.support.cors = true;
-    
-    //Llama todas las funciones que toman el usuario actual y regresan todos sus entradas en la BD
-    //getTweetsData();
-    getVideogamesData();
-    getPublishersData();
-    getDevelopersData();
-    getGenresData();
-    
-    alert ("Usuario loggeado: " + sessionStorage.user);
+	
+	//Si no se ha iniciado sesión, no se manda a llamar al handler
+	if (sessionStorage.getItem("user") === null) {
+		alert("No hay usuario actual");
+	}
+	else
+	{
+		//Llama todas las funciones que toman el usuario actual y regresan todos sus entradas en la BD
+    	//getTweetsData();
+		getVideogamesData();
+		getPublishersData();
+		getDevelopersData();
+		getGenresData();
+		
+		alert ("Usuario loggeado: " + sessionStorage.user);
+	}
 }
 
 function getVideogamesData()
