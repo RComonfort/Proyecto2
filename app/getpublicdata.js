@@ -6,10 +6,8 @@ function getData()
     jQuery.support.cors = true;
 	
 	//Si no se ha iniciado sesión, no se manda a llamar al handler
-	if (sessionStorage.getItem("user") === null) {
-		alert("No hay usuario actual");
-	}
-	else
+	
+	if ("user" in sessionStorage)
 	{
 		//Llama todas las funciones que toman el usuario actual y regresan todos sus entradas en la BD
     	//getTweetsData();
@@ -19,6 +17,9 @@ function getData()
 		getGenresData();
 		
 		alert ("Usuario loggeado: " + sessionStorage.user);
+	}
+	else {
+		alert("No hay usuario actual");
 	}
 }
 
