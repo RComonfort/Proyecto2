@@ -9,8 +9,8 @@ function getData()
 	{
 		//Llama todas las funciones que toman el usuario actual y regresan todos sus entradas en la BD
     	//getTweetsData();
-		getVideogamesData();
-		getPublishersData();
+		//getVideogamesData();
+		//getPublishersData();
 		//getDevelopersData();
 		//getGenresData();
 		

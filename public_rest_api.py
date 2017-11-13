@@ -117,8 +117,17 @@ class GetDevelopersHandler(webapp2.RequestHandler):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     id_user = self.request.get('user')
+     fuckingGoogleCloud = self.request.get('user')
+
+     if fuckingGoogleCloud == "" or fuckingGoogleCloud == "undefined" or fuckingGoogleCloud == "null":
+      return None
+
+     id_user = fuckingGoogleCloud
      objemp = Usuarios.query(Usuarios.email == id_user).get()
+     
+     if objemp is None:
+      return None
+
      strKey = objemp.key.urlsafe() 
      ownerKey = ndb.Key(urlsafe=strKey) 
      
