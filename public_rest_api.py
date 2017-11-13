@@ -60,8 +60,17 @@ class GetVideogamesHandler(webapp2.RequestHandler):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     id_user = self.request.get('user')
-     objemp = Usuarios.query(Usuarios.email == id_user).get() #No se puede evaluar en base a key cno este metodo
+     fgc = self.request.get('user')
+
+     if fgc == "" or fgc == "undefined" or fgc == "null":
+      return None
+
+     id_user = fgc
+     objemp = Usuarios.query(Usuarios.email == id_user).get()
+     
+     if objemp is None:
+      return None
+
      strKey = objemp.key.urlsafe() 
      ownerKey = ndb.Key(urlsafe=strKey) 
      
@@ -90,8 +99,17 @@ class GetPublishersHandler(webapp2.RequestHandler):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     id_user = self.request.get('user')
+     fgc = self.request.get('user')
+
+     if fgc == "" or fgc == "undefined" or fgc == "null":
+      return None
+
+     id_user = fgc
      objemp = Usuarios.query(Usuarios.email == id_user).get()
+     
+     if objemp is None:
+      return None
+
      strKey = objemp.key.urlsafe() 
      ownerKey = ndb.Key(urlsafe=strKey) 
      
@@ -117,12 +135,12 @@ class GetDevelopersHandler(webapp2.RequestHandler):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     fuckingGoogleCloud = self.request.get('user')
+     fgc = self.request.get('user')
 
-     if fuckingGoogleCloud == "" or fuckingGoogleCloud == "undefined" or fuckingGoogleCloud == "null":
+     if fgc == "" or fgc == "undefined" or fgc == "null":
       return None
 
-     id_user = fuckingGoogleCloud
+     id_user = fgc
      objemp = Usuarios.query(Usuarios.email == id_user).get()
      
      if objemp is None:
@@ -153,8 +171,17 @@ class GetGenresHandler(webapp2.RequestHandler):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     id_user = self.request.get('user')
+     fgc = self.request.get('user')
+
+     if fgc == "" or fgc == "undefined" or fgc == "null":
+      return None
+
+     id_user = fgc
      objemp = Usuarios.query(Usuarios.email == id_user).get()
+     
+     if objemp is None:
+      return None
+
      strKey = objemp.key.urlsafe() 
      ownerKey = ndb.Key(urlsafe=strKey) 
      
