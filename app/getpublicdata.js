@@ -5,20 +5,18 @@ function getData()
 
     jQuery.support.cors = true;
 	
-	//Si no se ha iniciado sesión, no se manda a llamar al handler
-	
 	if ("user" in sessionStorage)
 	{
 		//Llama todas las funciones que toman el usuario actual y regresan todos sus entradas en la BD
     	//getTweetsData();
 		getVideogamesData();
 		getPublishersData();
-		getDevelopersData();
-		getGenresData();
+		//getDevelopersData();
+		//getGenresData();
 		
 		alert ("Usuario loggeado: " + sessionStorage.user);
 	}
-	else {
+	else { //Si no se ha iniciado sesión, no se manda a llamar al handler
 		alert("No hay usuario actual");
 	}
 }
