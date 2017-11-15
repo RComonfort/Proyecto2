@@ -23,7 +23,7 @@ function addGenre()
 
   	 jQuery.ajax({
            type: "POST",
-           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/insert",
+           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/insert",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -68,7 +68,7 @@ function getGenresList()
 
      jQuery.ajax({
            type: "POST",
-           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/list",
+           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/list",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -109,7 +109,7 @@ function setupUpdateGenre()
     {
         jQuery.ajax({
             type: "POST",
-            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/get",
+            url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/get",
             data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -149,7 +149,7 @@ function deleteGenre(theKey)
     {
         jQuery.ajax({
             type: "POST",
-            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/delete",
+            url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/delete",
             data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -179,7 +179,7 @@ function uploadDemo()
     try
     {
      $.ajax({
-                url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/up",
+                url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/up",
                 dataType: 'text',
                 cache: false,
                 contentType: false,

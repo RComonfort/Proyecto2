@@ -1,4 +1,5 @@
-# coding=utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import webapp2
 from google.appengine.api import users
@@ -221,8 +222,7 @@ class UpHandler(webapp2.RequestHandler):
       content_t = mimetypes.guess_type(file_name)[0]
       real_path = os.path.join('/', bucket_name, file_name)
 
-      with cloudstorage.open(real_path, 'w', content_type=content_t,
-       options={'x-goog-acl': 'public-read'}) as f:
+      with cloudstorage.open(real_path, 'w', content_type=content_t, options={'x-goog-acl': 'public-read'}) as f:
        f.write(file_content.read())
 
       key = self._get_urls_for(file_name)

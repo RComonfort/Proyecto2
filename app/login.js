@@ -17,7 +17,7 @@ function loginDemo()
 
 	 jQuery.ajax({
          type: "POST",
-         url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/usuarios_api/v1/users/login",
+         url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/usuarios_api/v1/users/login",
          data: myData.toJsonString(),
          contentType: "application/json; charset=utf-8",
          dataType: "json",

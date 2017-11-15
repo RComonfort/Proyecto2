@@ -1,4 +1,5 @@
-# coding=utf-8
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import endpoints
 from google.appengine.ext import ndb
@@ -800,7 +801,7 @@ class UsuariosApi(remote.Service):
 ##update##
 # update
 #                   ENTRADA    SALIDA        RUTA              siempre es POST     NOMBRE
- @endpoints.method(UserUpdate, CodeMessage, path='user/update', http_method='POST', name='user.update')
+ @endpoints.method(UserUpdate, CodeMessage, path='users/update', http_method='POST', name='users.update')
 #siempre lleva cls y request
  def user_update(cls, request):
   try:

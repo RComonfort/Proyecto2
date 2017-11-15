@@ -27,7 +27,7 @@ function addDeveloper()
 
   	 jQuery.ajax({
            type: "POST",
-           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/insert",
+           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/insert",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -72,7 +72,7 @@ function getDeveloperList()
 
      jQuery.ajax({
            type: "POST",
-           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/list",
+           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/list",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -113,7 +113,7 @@ function setupUpdateDeveloper()
     {
         jQuery.ajax({
             type: "POST",
-            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/get",
+            url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/get",
             data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -156,7 +156,7 @@ function deleteDeveloper(theKey)
     {
         jQuery.ajax({
             type: "POST",
-            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/delete",
+            url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/delete",
             data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -186,7 +186,7 @@ function uploadDemo()
     try
     {
      $.ajax({
-                url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/up",
+                url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/up",
                 dataType: 'text',
                 cache: false,
                 contentType: false,

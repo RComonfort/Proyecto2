@@ -34,7 +34,7 @@ function addVideogame()
 
   	 jQuery.ajax({
            type: "POST",
-           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/insert",
+           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/insert",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -78,7 +78,7 @@ function getVideogameList()
 
      jQuery.ajax({
            type: "POST",
-           url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/list",
+           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/list",
            data: myData.toJsonString(),
            contentType: "application/json; charset=utf-8",
            dataType: "json",
@@ -121,7 +121,7 @@ function setupUpdateVideogame()
     {
         jQuery.ajax({
             type: "POST",
-            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/get",
+            url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/get",
             data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -169,7 +169,7 @@ function deleteVideogame(theKey)
     {
         jQuery.ajax({
             type: "POST",
-            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/delete",
+            url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/delete",
             data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -199,7 +199,7 @@ function uploadDemo()
     try
     {
      $.ajax({
-        url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/up",
+        url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/up",
         dataType: 'text',
         cache: false,
         contentType: false,
