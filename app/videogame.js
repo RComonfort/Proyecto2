@@ -138,14 +138,20 @@ function setupUpdateVideogame()
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
                  alert (response.data);
 
-                 $("#title_vg").val(response.data.title);
-                 $("#developer_vg").val(response.data.developer);
-                 $("#publisher_vg").val(response.data.publisher);
-                 $("#year_vg").val(response.data.year);
-                 $("#description_vg").val(response.data.description);
-                 $("#genre_vg").val(response.data.genre);
-                 $("#url_photo").val(response.data.image); //maybe i have to, somehow, set #uploaded_file with the retrieved url?
-                 uploadDemo(); //por si onChange() no se activa solo
+                 entity = response.data;
+
+                 entity.forEach(function(i)
+                 {
+                      $("#title_vg").val(i.title);
+                      $("#developer_vg").val(i.developer);
+                     $("#publisher_vg").val(i.publisher);
+                     $("#year_vg").val(i.year);
+                     $("#description_vg").val(i.description);
+                     $("#genre_vg").val(i.genre);
+                     $("#url_photo").val(i.image); //maybe i have to, somehow, set #uploaded_file with the retrieved url?
+                     uploadDemo(); //por si onChange() no se activa solo
+                 });
+                 
             },
         
             error: function (error) {            
@@ -169,12 +175,17 @@ function updateVideogame()
     //we could also try just calling the update api from web_token_api
     deleteVideogame (sessionStorage.updateModelKey); //borra primero
     addVideogame () //después agregalo con o sin cambios
+
+    GoBack();
 }
 
 //borra el videojuego con la clave dada
 function deleteVideogame(theKey)
 {
-    alert("token: " + sessionStorage.token + ", entityKey: " + theKey);
+    //alert("token: " + sessionStorage.token + ", entityKey: " + theKey);
+
+    var myData = new KeyObject(sessionStorage.updateModelKey);
+
 
     jQuery.support.cors = true;
     try
@@ -182,7 +193,7 @@ function deleteVideogame(theKey)
         jQuery.ajax({
             type: "POST",
             url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/delete",
-            data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
+            data: myData.toJsonString(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
