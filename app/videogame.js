@@ -138,13 +138,13 @@ function setupUpdateVideogame()
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
                  alert (response.data);
 
-                 $("#title_vg").val() = response.data.title;
-                 $("#developer_vg").val() = response.data.developer;
-                 $("#publisher_vg").val() = response.data.publisher;
-                 $("#year_vg").val() = response.data.year;
-                 $("#description_vg").val() = response.data.description;
-                 $("#genre_vg").val() = response.data.genre;
-                 $("#url_photo").val() = response.data.image; //maybe i have to, somehow, set #uploaded_file with the retrieved url?
+                 $("#title_vg").val(response.data.title);
+                 $("#developer_vg").val(response.data.developer);
+                 $("#publisher_vg").val(response.data.publisher);
+                 $("#year_vg").val(response.data.year);
+                 $("#description_vg").val(response.data.description);
+                 $("#genre_vg").val(response.data.genre);
+                 $("#url_photo").val(response.data.image); //maybe i have to, somehow, set #uploaded_file with the retrieved url?
                  uploadDemo(); //por si onChange() no se activa solo
             },
         
