@@ -506,7 +506,7 @@ class GenresApi(remote.Service):
 
 ######## Update Genre ##########  
   @endpoints.method(GenreUpdate, CodeMessage, path='genres/update', http_method='POST', name='genres.update')
-  def developer_update(cls, request):
+  def genre_update(cls, request):
     try:
       token = jwt.decode(request.token, 'secret')#CHECA EL TOKEN
       user = Usuarios.get_by_id(token['user_id'])#obtiene el usuario para poder acceder a los metodos declarados en models.py en la seccion de USUARIOS

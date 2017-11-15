@@ -78,6 +78,7 @@ class GetVideogamesHandler(webapp2.RequestHandler):
      for i in myEntities:
       myObj = DemoClass()
       
+      myObj.entityKey = i.entityKey
       myObj.title = i.title
       myObj.developer = i.developer
       myObj.publisher = i.publisher
@@ -115,6 +116,7 @@ class GetPublishersHandler(webapp2.RequestHandler):
      for i in myEntities:
       myObj = DemoClass()
       
+      myObj.entityKey = i.entityKey
       myObj.nameA = i.nameA
       myObj.location = i.location
       myObj.year = i.year
@@ -148,6 +150,7 @@ class GetDevelopersHandler(webapp2.RequestHandler):
      for i in myEntities:
       myObj = DemoClass()
       
+      myObj.entityKey = i.entityKey
       myObj.nameA = i.nameA
       myObj.location = i.location
       myObj.year = i.year
@@ -182,6 +185,7 @@ class GetGenresHandler(webapp2.RequestHandler):
      for i in myEntities:
       myObj = DemoClass()
       
+      myObj.entityKey = i.entityKey
       myObj.nameA = i.nameA
       myObj.description = i.description
       

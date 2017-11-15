@@ -53,11 +53,11 @@ function getVideogamesData()
 		                "<h5>" + "Genre: " + i.genre + "</h5>" +
 						"</div>" +
 						"<td>" + 
-						"<button onclick='deleteVideogame(\"" + i.key + "\")' class='btn btn-danger'>" + 
+						"<button onclick='deleteVideogame(\"" + i.entityKey + "\")' class='btn btn-danger'>" + 
 						  "<i class='fa fa fa-ban'></i> Delete </button>" + 
 						"</td>"+
 						"<td>" + 
-						"<button onclick='goToUpdateVideogame(\"" + i.key + "\")' class='btn btn-primary'>" + 
+						"<button onclick='goToUpdateVideogame(\"" + i.entityKey + "\")' class='btn btn-primary'>" + 
 						  "<i class='fa fa fa-ban'></i> Edit </button>" + 
 						"</td>"+
 		                "</div>" 
@@ -103,11 +103,11 @@ function getPublishersData()
 		                "<h5>" + "Year: " + i.year + "</h5>" +
 		                "</div>" +
 						"<td>" + 
-						"<button onclick='deletePublisher(\"" + i.key + "\")' class='btn btn-danger'>" + 
+						"<button onclick='deletePublisher(\"" + i.entityKey + "\")' class='btn btn-danger'>" + 
 						  "<i class='fa fa fa-ban'></i> Delete </button>" + 
 						"</td>"+
 		                "<td>" + 
-						"<button onclick='goToUpdatePublisher(\"" + i.key + "\")' class='btn btn-primary'>" + 
+						"<button onclick='goToUpdatePublisher(\"" + i.entityKey + "\")' class='btn btn-primary'>" + 
 						  "<i class='fa fa fa-ban'></i> Edit </button>" + 
 						"</td>"+
 		                "</div>" 
@@ -153,11 +153,11 @@ function getDevelopersData()
 		                "<h5>" + "Year: " + i.year + "</h5>" +
 		                "</div>" +
 						"<td>" + 
-						"<button onclick='deleteDeveloper(\"" + i.key + "\")' class='btn btn-danger'>" + 
+						"<button onclick='deleteDeveloper(\"" + i.entityKey + "\")' class='btn btn-danger'>" + 
 						  "<i class='fa fa fa-ban'></i> Delete </button>" + 
 						"</td>"+
 		                "<td>" + 
-						"<button onclick='goToUpdateDeveloper(\"" + i.key + "\")' class='btn btn-primary'>" + 
+						"<button onclick='goToUpdateDeveloper(\"" + i.entityKey + "\")' class='btn btn-primary'>" + 
 						  "<i class='fa fa fa-ban'></i> Edit </button>" + 
 						"</td>"+
 		                "</div>" 
@@ -199,11 +199,11 @@ function getGenresData()
 												"<h5>" + "Description: " + i.description + "</h5>" +
 												"</div>" +
 								"<td>" + 
-								"<button onclick='deleteGenre(\"" + i.key + "\")' class='btn btn-danger'>" + 
+								"<button onclick='deleteGenre(\"" + i.entityKey + "\")' class='btn btn-danger'>" + 
 									"<i class='fa fa fa-ban'></i> Delete </button>" + 
 								"</td>"+
 												"<td>" + 
-								"<button onclick='goToUpdateGenre(\"" + i.key + "\")' class='btn btn-primary'>" + 
+								"<button onclick='goToUpdateGenre(\"" + i.entityKey + "\")' class='btn btn-primary'>" + 
 									"<i class='fa fa fa-ban'></i> Edit </button>" + 
 								"</td>"+
 												"</div>" 
@@ -265,7 +265,7 @@ function getTweetsData()
 /* in order to send directly the info to the update method, instead of asking for it to the hanlder inside the updateEntity(..) :
 "<td>" + 
 						"<button onclick='updateVideogame(\"" + 
-																i.key + "\", \"" + 
+																i.entityKey + "\", \"" + 
 																i.title + "\", \"" + 
 																i.developer + "\", \"" +
 																i.publisher + "\", \"" +

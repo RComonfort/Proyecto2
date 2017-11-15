@@ -97,12 +97,12 @@ function goToUpdateGenre(theKey)
 {
     sessionStorage.updateModelKey = theKey;
 
-    window.location = "/genreupdate";
+    window.location = "/genreupdate.html";
 }
 
 function setupUpdateGenre()
 {
-    alert("token: " + sessionStorage.tokenint + ", key to update: " + sessionStorage.updateModelKey);
+    alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
 
     jQuery.support.cors = true;
     try

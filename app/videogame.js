@@ -108,13 +108,13 @@ function goToUpdateVideogame(theKey)
 {
     sessionStorage.updateModelKey = theKey;
 
-    window.location = "/videogameupdate"; //or window.location.href='/videogameupdate'
+    window.location = "/videogameupdate.html"; //or window.location.href='/videogameupdate'
 }
 
 //requests and sets the values of the given object in the input boxes in videogameupdate.html on load
 function setupUpdateVideogame()
 {
-    alert("token: " + sessionStorage.tokenint + ", key to update: " + sessionStorage.updateModelKey);
+    alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
 
     jQuery.support.cors = true;
     try

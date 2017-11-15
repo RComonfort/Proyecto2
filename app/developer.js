@@ -101,12 +101,12 @@ function goToUpdateDeveloper(theKey)
 {
     sessionStorage.updateModelKey = theKey;
 
-    window.location = "/developerupdate";
+    window.location = "/developerupdate.html";
 }
 
 function setupUpdateDeveloper()
 {
-    alert("token: " + sessionStorage.tokenint + ", key to update: " + sessionStorage.updateModelKey);
+    alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
 
     jQuery.support.cors = true;
     try

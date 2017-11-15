@@ -100,13 +100,13 @@ function goToUpdatePublisher(theKey)
 {
     sessionStorage.updateModelKey = theKey;
 
-    window.location = "/publisherupdate"; //or window.location.href='/publisherupdate'
+    window.location = "/publisherupdate.html"; //or window.location.href='/publisherupdate'
 }
 
 //requests and sets the values of the given object in the input boxes in publisherupdate.html on load
 function setupUpdatePublisher()
 {
-    alert("token: " + sessionStorage.tokenint + ", key to update: " + sessionStorage.updateModelKey);
+    alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
 
     jQuery.support.cors = true;
     try
