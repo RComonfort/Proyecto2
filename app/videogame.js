@@ -65,6 +65,13 @@ function TokenObject() {
 
 };
 
+function KeyObject(f1) {
+    
+    this.tokenint = sessionStorage.token;
+    this.entityKey = f1;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
 
 function getVideogameList()
 {
@@ -108,13 +115,16 @@ function goToUpdateVideogame(theKey)
 {
     sessionStorage.updateModelKey = theKey;
 
-    window.location = "/videogameupdate.html"; //or window.location.href='/videogameupdate'
+    window.location.href='/videogameupdate';
+    //window.location = "/videogameupdate.html"; 
 }
 
 //requests and sets the values of the given object in the input boxes in videogameupdate.html on load
 function setupUpdateVideogame()
 {
-    alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
+    //alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
+
+    var myData = new KeyObject(sessionStorage.updateModelKey);
 
     jQuery.support.cors = true;
     try
@@ -122,7 +132,7 @@ function setupUpdateVideogame()
         jQuery.ajax({
             type: "POST",
             url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/get",
-            data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
+            data: myData.toJsonString(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
@@ -164,6 +174,8 @@ function updateVideogame()
 //borra el videojuego con la clave dada
 function deleteVideogame(theKey)
 {
+    alert("token: " + sessionStorage.token + ", entityKey: " + theKey);
+
     jQuery.support.cors = true;
     try
     {

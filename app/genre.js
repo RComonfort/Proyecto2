@@ -55,6 +55,14 @@ function TokenObject() {
 
 };
 
+function KeyObject(f1) {
+    
+    this.tokenint = sessionStorage.token;
+    this.entityKey = f1;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
 
 function getGenresList()
 {
@@ -97,12 +105,16 @@ function goToUpdateGenre(theKey)
 {
     sessionStorage.updateModelKey = theKey;
 
-    window.location = "/genreupdate.html";
+    window.location.href='/genreupdate';
+    //window.location = "/genreupdate.html";
 }
 
 function setupUpdateGenre()
 {
-    alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
+    //alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
+
+    var myData = new KeyObject(sessionStorage.updateModelKey);
+
 
     jQuery.support.cors = true;
     try
@@ -110,7 +122,7 @@ function setupUpdateGenre()
         jQuery.ajax({
             type: "POST",
             url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/get",
-            data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
+            data: myData.toJsonString(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?

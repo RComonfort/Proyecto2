@@ -58,6 +58,14 @@ function TokenObject() {
 
 };
 
+function KeyObject(f1) {
+    
+    this.tokenint = sessionStorage.token;
+    this.entityKey = f1;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
 function getPublisherList()
 {
   try
@@ -100,13 +108,16 @@ function goToUpdatePublisher(theKey)
 {
     sessionStorage.updateModelKey = theKey;
 
-    window.location = "/publisherupdate.html"; //or window.location.href='/publisherupdate'
+    window.location.href='/publisherupdate';
+    //window.location = "/publisherupdate.html"; 
 }
 
 //requests and sets the values of the given object in the input boxes in publisherupdate.html on load
 function setupUpdatePublisher()
 {
-    alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
+    //alert("token: " + sessionStorage.token + ", key to update: " + sessionStorage.updateModelKey);
+
+    var myData = new KeyObject(sessionStorage.updateModelKey);
 
     jQuery.support.cors = true;
     try
@@ -114,7 +125,7 @@ function setupUpdatePublisher()
         jQuery.ajax({
             type: "POST",
             url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/publishers_api/v1/publishers/get",
-            data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
+            data: myData.toJsonString(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
