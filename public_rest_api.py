@@ -55,24 +55,21 @@ class GetTweetsHandler(webapp2.RequestHandler):
      self.response.write(json_string)
 
 class GetVideogamesHandler(webapp2.RequestHandler):
-
     def get(self):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
-
-     fgc = self.request.get('user')
-
-     if fgc == "" or fgc == "undefined" or fgc == "null":
-      return None
-
-     id_user = fgc
+     
+     id_user = self.request.get('user')
      objemp = Usuarios.query(Usuarios.email == id_user).get()
      
      if objemp is None:
+      myList = []
+      json_string = json.dumps(myList, default=MyClass)
+      self.response.write(json_string)
       return None
 
      strKey = objemp.key.urlsafe() 
-     ownerKey = ndb.Key(urlsafe=strKey) 
+     ownerKey = ndb.Key(urlsafe=strKey)
      
      myEntities = Videogame.query(Videogame.user_key == ownerKey)
 
@@ -99,20 +96,18 @@ class GetPublishersHandler(webapp2.RequestHandler):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     fgc = self.request.get('user')
-
-     if fgc == "" or fgc == "undefined" or fgc == "null":
-      return None
-
-     id_user = fgc
+     id_user = self.request.get('user')
      objemp = Usuarios.query(Usuarios.email == id_user).get()
      
      if objemp is None:
+      myList = []
+      json_string = json.dumps(myList, default=MyClass)
+      self.response.write(json_string)
       return None
 
      strKey = objemp.key.urlsafe() 
-     ownerKey = ndb.Key(urlsafe=strKey) 
-     
+     ownerKey = ndb.Key(urlsafe=strKey)
+
      myEntities = Publisher.query(Publisher.user_key == ownerKey)
 
      myList = []
@@ -130,25 +125,22 @@ class GetPublishersHandler(webapp2.RequestHandler):
      self.response.write(json_string)
      
 class GetDevelopersHandler(webapp2.RequestHandler):
-
     def get(self):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     fgc = self.request.get('user')
-
-     if fgc == "" or fgc == "undefined" or fgc == "null":
-      return None
-
-     id_user = fgc
+     id_user = self.request.get('user')
      objemp = Usuarios.query(Usuarios.email == id_user).get()
      
      if objemp is None:
+      myList = []
+      json_string = json.dumps(myList, default=MyClass)
+      self.response.write(json_string)
       return None
 
      strKey = objemp.key.urlsafe() 
-     ownerKey = ndb.Key(urlsafe=strKey) 
-     
+     ownerKey = ndb.Key(urlsafe=strKey)
+
      myEntities = Developer.query(Developer.user_key == ownerKey)
 
      myList = []
@@ -171,19 +163,17 @@ class GetGenresHandler(webapp2.RequestHandler):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
 
-     fgc = self.request.get('user')
-
-     if fgc == "" or fgc == "undefined" or fgc == "null":
-      return None
-
-     id_user = fgc
+     id_user = self.request.get('user')
      objemp = Usuarios.query(Usuarios.email == id_user).get()
      
      if objemp is None:
+      myList = []
+      json_string = json.dumps(myList, default=MyClass)
+      self.response.write(json_string)
       return None
 
      strKey = objemp.key.urlsafe() 
-     ownerKey = ndb.Key(urlsafe=strKey) 
+     ownerKey = ndb.Key(urlsafe=strKey)
      
      myEntities = Genre.query(Genre.user_key == ownerKey)
 

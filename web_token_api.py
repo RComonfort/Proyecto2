@@ -791,10 +791,10 @@ class UsuariosApi(remote.Service):
    if not user.verify_password(request.password): # checa la contrasena
     raise NotFoundException()
 
-   token = jwt.encode({'user_id': user.key.id(), 'exp': time.time() + 43200}, 'secret') #crea el token, 43200 segundos dura un token
-   message = TokenMessage(code=1, token=token, msg=key ) # regresa token
+   token = jwt.encode({'user_id': user.key.id(), 'exp': time.time() + 43200}, 'secret') #crea el token que dura 43200 segundos
+   message = TokenMessage(code=1, msg=key, token=token ) # regresa token #CAMBIO: token como tercer parametro en lugar de segundo, para hacer match en la definición de messages.py
   except NotFoundException:
-   message = TokenMessage(code=-1, token=None, msg='Wrong username or password' )
+   message = TokenMessage(code=-1, msg='Wrong username or password', token=None )
   return message
 
 ##update##
