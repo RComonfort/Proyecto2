@@ -24,7 +24,7 @@ function loginDemo()
          success: function (response) {
               // do something
               sessionStorage.token = response.token;
-              sessionStorage.user = response.msg; //guarda el correo del usuario actual
+              sessionStorage.user = response.message; //guarda el correo del usuario actual
               alert ("token generado: " + sessionStorage.token);
               alert ("Usuario loggeado: " + sessionStorage.user);
               window.location = "/";

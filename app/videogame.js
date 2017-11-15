@@ -58,7 +58,6 @@ function addVideogame()
 
 }
 
-
 function TokenObject() {
     
     this.tokenint = sessionStorage.token;
@@ -104,6 +103,91 @@ function getVideogameList()
 
 }
 
+//goes to the html to update a videogame and sets up a sessionStorage variable
+function goToUpdateVideogame(theKey)
+{
+    sessionStorage.updateModelKey = theKey;
+
+    window.location = "/videogameupdate"; //or window.location.href='/videogameupdate'
+}
+
+//requests and sets the values of the given object in the input boxes in videogameupdate.html on load
+function setupUpdateVideogame()
+{
+    alert("token: " + sessionStorage.tokenint + ", key to update: " + sessionStorage.updateModelKey);
+
+    jQuery.support.cors = true;
+    try
+    {
+        jQuery.ajax({
+            type: "POST",
+            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/get",
+            data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
+                 alert (response.data);
+
+                 $("#title_vg").val() = response.data.title;
+                 $("#developer_vg").val() = response.data.developer;
+                 $("#publisher_vg").val() = response.data.publisher;
+                 $("#year_vg").val() = response.data.year;
+                 $("#description_vg").val() = response.data.description;
+                 $("#genre_vg").val() = response.data.genre;
+                 $("#url_photo").val() = response.data.image; //maybe i have to, somehow, set #uploaded_file with the retrieved url?
+                 uploadDemo(); //por si onChange() no se activa solo
+            },
+        
+            error: function (error) {            
+                 // error handler
+                 alert("error :" + error.message)
+                 GoBack(); //regresa para evitar que se repita el error
+            }
+ 
+        });
+    }
+    catch(e)
+    {
+      alert("error : " +  e);
+      GoBack(); //regresa para evitar que se repita el error
+    }
+}
+
+//makes the actual update when the user clicks the button in videogameupdate.html
+function updateVideogame()
+{
+    //we could also try just calling the update api from web_token_api
+    deleteVideogame (sessionStorage.updateModelKey); //borra primero
+    addVideogame () //después agregalo con o sin cambios
+}
+
+//borra el videojuego con la clave dada
+function deleteVideogame(theKey)
+{
+    jQuery.support.cors = true;
+    try
+    {
+        jQuery.ajax({
+            type: "POST",
+            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/delete",
+            data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
+                 alert (response.message);
+            },
+            error: function (error) {            
+                 // error handler
+                 alert("error :" + error.message)
+            }
+        });
+    }
+    catch(e)
+    {
+      alert("error : " +  e);
+    }
+}
+
 //Sets the selected image as preview
 function uploadDemo()
 {
@@ -115,22 +199,22 @@ function uploadDemo()
     try
     {
      $.ajax({
-                url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/up",
-                dataType: 'text',
-                cache: false,
-                contentType: false,
-                processData: false,
-                data: form_data,
-                type: 'post',
-                crossDomain: true,
-                success: function(response){
+        url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/up",
+        dataType: 'text',
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,
+        type: 'post',
+        crossDomain: true,
+        success: function(response){
 
-                                document.getElementById("preview").src=response;
+                        document.getElementById("preview").src=response;
 
-                                sessionStorage.urlImage = response;
+                        sessionStorage.urlImage = response;
 
-                                document.getElementById("url_photo").value = response;
-                }
+                        document.getElementById("url_photo").value = response;
+        }
       });
     }
     catch(e)
@@ -139,7 +223,9 @@ function uploadDemo()
      }
 }
 
+//Goes back to index.html
 function GoBack()
 {
-	window.history.back();
+    //window.history.back();
+    window.location = "/";
 }

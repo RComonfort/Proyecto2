@@ -27,7 +27,7 @@ class EmailPasswordMessage(messages.Message):
 #regresa un token
 class TokenMessage(messages.Message):
     code = messages.IntegerField(1)
-    msg = messages.StringField(2) #Cambio de message a msg porque javascript usa la palabra clave "message"...
+    message = messages.StringField(2)
     token = messages.StringField(3)
 
 #regresa mensajes de lo ocurrido

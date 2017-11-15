@@ -93,6 +93,81 @@ function getGenresList()
 
 }
 
+function goToUpdateGenre(theKey)
+{
+    sessionStorage.updateModelKey = theKey;
+
+    window.location = "/genreupdate";
+}
+
+function setupUpdateGenre()
+{
+    alert("token: " + sessionStorage.tokenint + ", key to update: " + sessionStorage.updateModelKey);
+
+    jQuery.support.cors = true;
+    try
+    {
+        jQuery.ajax({
+            type: "POST",
+            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/get",
+            data: {tokenint: sessionStorage.token, entityKey: sessionStorage.updateModelKey}, //if this doesn't work, declare an object type and send the json
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
+                 alert (response.data);
+
+                 $("#name_gen").val() = response.data.nameA;
+                 $("#description_gen").val() = response.data.description;
+            },
+        
+            error: function (error) {            
+                 // error handler
+                 alert("error :" + error.message)
+                 GoBack(); //regresa para evitar que se repita el error
+            }
+ 
+        });
+    }
+    catch(e)
+    {
+      alert("error : " +  e);
+      GoBack(); //regresa para evitar que se repita el error
+    }
+}
+
+function updateGenre()
+{
+    //we could also try just calling the update api from web_token_api
+    deleteGenre(sessionStorage.updateModelKey); //borra primero
+    addGenre () //después agregalo con o sin cambios
+}
+
+function deleteGenre(theKey)
+{
+    jQuery.support.cors = true;
+    try
+    {
+        jQuery.ajax({
+            type: "POST",
+            url: "http://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/delete",
+            data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) { 
+                 alert (response.message);
+            },
+            error: function (error) {            
+                 // error handler
+                 alert("error :" + error.message)
+            }
+        });
+    }
+    catch(e)
+    {
+      alert("error : " +  e);
+    }
+}
+
 //Sets the selected image as preview
 function uploadDemo()
 {
@@ -128,7 +203,9 @@ function uploadDemo()
      }
 }
 
+//Goes back to index.html
 function GoBack()
 {
-	window.history.back();
+    //window.history.back();
+    window.location = "/";
 }

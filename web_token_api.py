@@ -792,9 +792,9 @@ class UsuariosApi(remote.Service):
     raise NotFoundException()
 
    token = jwt.encode({'user_id': user.key.id(), 'exp': time.time() + 43200}, 'secret') #crea el token que dura 43200 segundos
-   message = TokenMessage(code=1, msg=key, token=token ) # regresa token #CAMBIO: token como tercer parametro en lugar de segundo, para hacer match en la definición de messages.py
+   message = TokenMessage(code=1, message=key, token=token ) # regresa token #CAMBIO: token como tercer parametro en lugar de segundo, para hacer match en la definición de messages.py, debe ser lo mismo, ¿no?
   except NotFoundException:
-   message = TokenMessage(code=-1, msg='Wrong username or password', token=None )
+   message = TokenMessage(code=-1, message='Wrong username or password', token=None )
   return message
 
 ##update##

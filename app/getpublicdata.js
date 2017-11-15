@@ -9,10 +9,10 @@ function getData()
 	{
 		//Llama todas las funciones que toman el usuario actual y regresan todos sus entradas en la BD
     	//getTweetsData();
-		//getVideogamesData();
-		//getPublishersData();
-		//getDevelopersData();
-		//getGenresData();
+		getVideogamesData();
+		getPublishersData();
+		getDevelopersData();
+		getGenresData();
 		
 		alert ("Usuario loggeado: " + sessionStorage.user);
 	}
@@ -51,7 +51,15 @@ function getVideogamesData()
 		                "<h5>" + "Release year: " + i.year + "</h5>" +
 		                "<h5>" + "Description: " + i.description + "</h5>" +
 		                "<h5>" + "Genre: " + i.genre + "</h5>" +
-		                "</div>" +
+						"</div>" +
+						"<td>" + 
+						"<button onclick='deleteVideogame(\"" + i.key + "\")' class='btn btn-danger'>" + 
+						  "<i class='fa fa fa-ban'></i> Delete </button>" + 
+						"</td>"+
+						"<td>" + 
+						"<button onclick='goToUpdateVideogame(\"" + i.key + "\")' class='btn btn-primary'>" + 
+						  "<i class='fa fa fa-ban'></i> Edit </button>" + 
+						"</td>"+
 		                "</div>" 
 		               $("#videogames").append(nombre);
 		   });
@@ -90,10 +98,18 @@ function getPublishersData()
 		                " class='img-responsive img-circle' alt='team img' heigth='150' width='150'" +
 		                " >" +
 		                " <div class='section-title wow bounceIn'> " +
-		                "<h3>" + "Name: " +i.nameA + "</h3>" +
-		                "<h5>" + "Location: "+ i.location + "</h5>" +
+		                "<h3>" + "Name: " + i.nameA + "</h3>" +
+		                "<h5>" + "Location: " + i.location + "</h5>" +
 		                "<h5>" + "Year: " + i.year + "</h5>" +
 		                "</div>" +
+						"<td>" + 
+						"<button onclick='deletePublisher(\"" + i.key + "\")' class='btn btn-danger'>" + 
+						  "<i class='fa fa fa-ban'></i> Delete </button>" + 
+						"</td>"+
+		                "<td>" + 
+						"<button onclick='goToUpdatePublisher(\"" + i.key + "\")' class='btn btn-primary'>" + 
+						  "<i class='fa fa fa-ban'></i> Edit </button>" + 
+						"</td>"+
 		                "</div>" 
 		               $("#publishers").append(nombre);
 		   });
@@ -136,6 +152,14 @@ function getDevelopersData()
 		                "<h5>" + "Location: " + i.location + "</h5>" +
 		                "<h5>" + "Year: " + i.year + "</h5>" +
 		                "</div>" +
+						"<td>" + 
+						"<button onclick='deleteDeveloper(\"" + i.key + "\")' class='btn btn-danger'>" + 
+						  "<i class='fa fa fa-ban'></i> Delete </button>" + 
+						"</td>"+
+		                "<td>" + 
+						"<button onclick='goToUpdateDeveloper(\"" + i.key + "\")' class='btn btn-primary'>" + 
+						  "<i class='fa fa fa-ban'></i> Edit </button>" + 
+						"</td>"+
 		                "</div>" 
 		               $("#developers").append(nombre);
 		   });
@@ -155,31 +179,39 @@ function getGenresData()
 	try
     {                         
      $.ajax({
-	    url: "/getgenres",
-	    dataType: 'json',
-	    cache: false,
-	    contentType: false,
-	    processData: true,
-	    data: {user: sessionStorage.user}, //only the entities of current user are returned                       
-	    type: 'get',
-	    crossDomain: true,
-	    success: function(response) {
-	  	entries = response; //all the entities returned by the handler in public_rest_api
-	    //alert(response);
-		  entries.forEach(function (i) 
-		  {
-		     var nombre = "<div class='col-md-3 col-sm-3 wow fadeInUp' " +
-			" data-wow-delay='0.2s'> " +
-		                " <div class='section-title wow bounceIn'> " +
-		                "<h3>" + "Genre: " + i.nameA + "</h3>" +
-		                "<h5>" + "Description: " + i.description + "</h5>" +
-		                "</div>" +
-		                "</div>" 
-		               $("#genres").append(nombre);
-		   });
-	   
- 	 	}
-        });          
+				url: "/getgenres",
+				dataType: 'json',
+				cache: false,
+				contentType: false,
+				processData: true,
+				data: {user: sessionStorage.user}, //only the entities of current user are returned                       
+				type: 'get',
+				crossDomain: true,
+				success: function(response) {
+					entries = response; //all the entities returned by the handler in public_rest_api
+					//alert(response);
+					entries.forEach(function (i) 
+					{
+						var nombre = "<div class='col-md-3 col-sm-3 wow fadeInUp' " +
+						"data-wow-delay='0.2s'> " +
+												" <div class='section-title wow bounceIn'> " +
+												"<h3>" + "Genre: " + i.nameA + "</h3>" +
+												"<h5>" + "Description: " + i.description + "</h5>" +
+												"</div>" +
+								"<td>" + 
+								"<button onclick='deleteGenre(\"" + i.key + "\")' class='btn btn-danger'>" + 
+									"<i class='fa fa fa-ban'></i> Delete </button>" + 
+								"</td>"+
+												"<td>" + 
+								"<button onclick='goToUpdateGenre(\"" + i.key + "\")' class='btn btn-primary'>" + 
+									"<i class='fa fa fa-ban'></i> Edit </button>" + 
+								"</td>"+
+												"</div>" 
+											$("#genres").append(nombre);
+					});
+			
+				}
+      });          
      
     }
  catch(e)
@@ -230,3 +262,18 @@ function getTweetsData()
 }
 
 
+/* in order to send directly the info to the update method, instead of asking for it to the hanlder inside the updateEntity(..) :
+"<td>" + 
+						"<button onclick='updateVideogame(\"" + 
+																i.key + "\", \"" + 
+																i.title + "\", \"" + 
+																i.developer + "\", \"" +
+																i.publisher + "\", \"" +
+																i.year + "\", \"" +
+																i.description + "\", \"" +
+																i.genre + "\", \"" +
+																i.image + "\")' class='btn btn-primary'>" + 
+						  "<i class='fa fa fa-ban'></i> Edit </button>" + 
+						"</td>"+ 
+						
+*/

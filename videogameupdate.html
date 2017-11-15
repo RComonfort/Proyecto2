@@ -1,0 +1,52 @@
+<html>
+	
+	<head>
+	 <title>
+	   Update Videogame
+	 </title>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	
+	<script>
+	// contact
+	
+	
+	</script>
+	
+	</head>
+	<body onload="setupUpdateVideogame()" data-spy="scroll" data-target=".navbar-collapse" data-offset="50">
+	
+	
+	<h1> Update Videogame</h1>
+	
+	title: <input type="text" id="title_vg" value="" /> <br>
+	developer: <input type="text" id="developer_vg" value="" /> <br>
+	publisher: <input type="text" id="publisher_vg" value="" /> <br>
+	year: <input type="text" id="year_vg" value="" /> <br>
+	description: <input type="text" id="description_vg" value="" /> <br>
+	genre: <input type="text" id="genre_vg" value="" /> <br>
+	
+	 <div class="col-md-offset-2 col-md-8 col-sm-offset-1 col-sm-10 text-center">
+				  <label for="exampleInputEmail1"><i>Cover</i></label>
+				   <br>
+				   <img  src="" alt="Image preview" id="preview" style="width:128px;height:128px;" >
+				   <br>
+				   <input type="text" id="url_photo">
+				   <br><input onchange="uploadDemo()" type="file"  id="uploaded_file" name="uploaded_file">
+				  </div>
+	
+	<br>
+	<button onclick="updateVideogame()"> Update </button> 
+	
+	<br>
+	<br>
+	
+	<button onclick="GoBack()"> Go Back </button>
+	
+	<script src="app/videogame.js"></script>
+	
+	
+	
+	</body>
+	</html>
+	
