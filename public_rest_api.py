@@ -211,7 +211,6 @@ class UpHandler(webapp2.RequestHandler):
 
      return url
 
-
     def post(self):
      self.response.headers.add_header('Access-Control-Allow-Origin', '*')
      self.response.headers['Content-Type'] = 'application/json'
@@ -324,6 +323,66 @@ class GenreHandler(webapp2.RequestHandler):
     template = jinja_env.get_template(template_name)
     return template.render(context)
 
+class VideogameUpdateHandler(webapp2.RequestHandler):
+
+   def get(self):
+
+    template_context = {}
+    self.response.out.write(
+      self._render_template('videogameupdate.html', template_context))
+
+   def _render_template(self, template_name, context=None):
+    if context is None:
+     context = {}
+
+    template = jinja_env.get_template(template_name)
+    return template.render(context)
+
+class DeveloperUpdateHandler(webapp2.RequestHandler):
+
+   def get(self):
+
+    template_context = {}
+    self.response.out.write(
+      self._render_template('developerupdate.html', template_context))
+
+   def _render_template(self, template_name, context=None):
+    if context is None:
+     context = {}
+
+    template = jinja_env.get_template(template_name)
+    return template.render(context)
+
+class PublisherUpdateHandler(webapp2.RequestHandler):
+
+   def get(self):
+
+    template_context = {}
+    self.response.out.write(
+      self._render_template('publisherupdate.html', template_context))
+
+   def _render_template(self, template_name, context=None):
+    if context is None:
+     context = {}
+
+    template = jinja_env.get_template(template_name)
+    return template.render(context)
+
+class GenreUpdateHandler(webapp2.RequestHandler):
+
+   def get(self):
+
+    template_context = {}
+    self.response.out.write(
+      self._render_template('genreupdate.html', template_context))
+
+   def _render_template(self, template_name, context=None):
+    if context is None:
+     context = {}
+
+    template = jinja_env.get_template(template_name)
+    return template.render(context)
+
 class MainHandler(webapp2.RequestHandler):
 
    def get(self):
@@ -353,5 +412,9 @@ app = webapp2.WSGIApplication([
     ('/getvideogames', GetVideogamesHandler),
     ('/getpublishers', GetPublishersHandler),
     ('/getdevelopers', GetDevelopersHandler),
-    ('/getgenres', GetGenresHandler)
+    ('/getgenres', GetGenresHandler),
+    ('/videogameupdate', VideogameUpdateHandler),
+    ('/developerupdate', DeveloperUpdateHandler),
+    ('/publisherupdate', PublisherUpdateHandler),
+    ('/genreupdate', GenreUpdateHandler)
 ], debug = True)
