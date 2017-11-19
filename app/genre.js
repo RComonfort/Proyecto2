@@ -8,6 +8,20 @@ function GenreObject(f1, f2) {
     this.toJsonString = function () { return JSON.stringify(this); };
 };
 
+function TokenObject() {
+    
+    this.tokenint = sessionStorage.token;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
+function KeyObject(f1) {
+    
+    this.tokenint = sessionStorage.token;
+    this.entityKey = f1;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
 
 function addGenre()
 {
@@ -46,22 +60,6 @@ function addGenre()
    }
 
 }
-
-
-function TokenObject() {
-    
-    this.tokenint = sessionStorage.token;
-    this.toJsonString = function () { return JSON.stringify(this); };
-
-};
-
-function KeyObject(f1) {
-    
-    this.tokenint = sessionStorage.token;
-    this.entityKey = f1;
-    this.toJsonString = function () { return JSON.stringify(this); };
-
-};
 
 
 function getGenresList()
@@ -115,7 +113,6 @@ function setupUpdateGenre()
 
     var myData = new KeyObject(sessionStorage.updateModelKey);
 
-
     jQuery.support.cors = true;
     try
     {
@@ -149,20 +146,22 @@ function setupUpdateGenre()
 
 function updateGenre()
 {
+    addGenre ();
     //we could also try just calling the update api from web_token_api
-    deleteGenre(sessionStorage.updateModelKey); //borra primero
-    addGenre () //después agregalo con o sin cambios
+    deleteGenre(sessionStorage.updateModelKey);
 }
 
 function deleteGenre(theKey)
 {
+    var myData = new KeyObject(theKey);
+
     jQuery.support.cors = true;
     try
     {
         jQuery.ajax({
             type: "POST",
             url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/delete",
-            data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
+            data: myData.toJsonString(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { 
@@ -178,6 +177,8 @@ function deleteGenre(theKey)
     {
       alert("error : " +  e);
     }
+
+    GoBack();
 }
 
 //Sets the selected image as preview

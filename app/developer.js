@@ -12,6 +12,23 @@ function DeveloperObject(f1, f2, f3) {
 };
 
 
+
+function TokenObject() {
+    
+    this.tokenint = sessionStorage.token;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
+
+function KeyObject(f1) {
+    
+    this.tokenint = sessionStorage.token;
+    this.entityKey = f1;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
 function addDeveloper()
 {
 	try
@@ -50,24 +67,6 @@ function addDeveloper()
    }
 
 }
-
-
-function TokenObject() {
-    
-    this.tokenint = sessionStorage.token;
-    this.toJsonString = function () { return JSON.stringify(this); };
-
-};
-
-
-function KeyObject(f1) {
-    
-    this.tokenint = sessionStorage.token;
-    this.entityKey = f1;
-    this.toJsonString = function () { return JSON.stringify(this); };
-
-};
-
 
 function getDeveloperList()
 {
@@ -130,14 +129,18 @@ function setupUpdateDeveloper()
             data: myData.toJsonString(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
-                 alert (response.data);
+            success: function (response) { 
+                 
+                entity = response.data;
 
-                 $("#name_dev").val() = response.data.nameA;
-                 $("#location_dev").val() = response.data.location;
-                 $("#year_dev").val() = response.data.year;
-                 $("#url_photo").val() = response.data.logo; //if it doesn't work, maybe i have to, somehow, set #uploaded_file with the retrieved url?
-                 uploadDemo(); //por si onChange() no se activa solo
+                entity.forEach(function (i){
+                    $("#name_dev").val(i.nameA);
+                    $("#location_dev").val(i.location);
+                    $("#year_dev").val(i.year);
+                    $("#url_photo").val(i.logo);
+                    uploadDemo(); 
+                });
+                 
             },
         
             error: function (error) {            
@@ -157,20 +160,22 @@ function setupUpdateDeveloper()
 
 function updateDeveloper()
 {
+    addDeveloper ();
     //we could also try just calling the update api from web_token_api
-    deleteDeveloper (sessionStorage.updateModelKey); //borra primero
-    addDeveloper () //después agregalo con o sin cambios
+    deleteDeveloper (sessionStorage.updateModelKey);
 }
 
 function deleteDeveloper(theKey)
 {
+    var myData = new KeyObject(theKey);
+
     jQuery.support.cors = true;
     try
     {
         jQuery.ajax({
             type: "POST",
             url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/delete",
-            data: {tokenint: sessionStorage.token, entityKey: theKey}, //if this doesn't work, declare an object type and send the json
+            data: myData.toJsonString(), 
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
@@ -186,6 +191,8 @@ function deleteDeveloper(theKey)
     {
       alert("error : " +  e);
     }
+
+    GoBack();
 }
 
 //Sets the selected image as preview

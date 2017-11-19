@@ -15,6 +15,20 @@ function VideogameObject(f1, f2, f3, f4, f5, f6) {
 
 };
 
+function TokenObject() {
+    
+    this.tokenint = sessionStorage.token;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
+function KeyObject(f1) {
+    
+    this.tokenint = sessionStorage.token;
+    this.entityKey = f1;
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
 
 function addVideogame()
 {
@@ -58,20 +72,6 @@ function addVideogame()
 
 }
 
-function TokenObject() {
-    
-    this.tokenint = sessionStorage.token;
-    this.toJsonString = function () { return JSON.stringify(this); };
-
-};
-
-function KeyObject(f1) {
-    
-    this.tokenint = sessionStorage.token;
-    this.entityKey = f1;
-    this.toJsonString = function () { return JSON.stringify(this); };
-
-};
 
 function getVideogameList()
 {
@@ -136,20 +136,21 @@ function setupUpdateVideogame()
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
-                 alert (response.data);
 
                  entity = response.data;
 
                  entity.forEach(function(i)
                  {
-                      $("#title_vg").val(i.title);
-                      $("#developer_vg").val(i.developer);
+                     $("#title_vg").val(i.title);
+                     $("#developer_vg").val(i.developer);
                      $("#publisher_vg").val(i.publisher);
                      $("#year_vg").val(i.year);
                      $("#description_vg").val(i.description);
                      $("#genre_vg").val(i.genre);
-                     $("#url_photo").val(i.image); //maybe i have to, somehow, set #uploaded_file with the retrieved url?
+                     $("#url_photo").val(i.image);
+                     //$("#uploaded_file").val(i.image);
                      uploadDemo(); //por si onChange() no se activa solo
+                     //sessionStorage.urlImage = i.image;
                  });
                  
             },
@@ -172,11 +173,11 @@ function setupUpdateVideogame()
 //makes the actual update when the user clicks the button in videogameupdate.html
 function updateVideogame()
 {
-    //we could also try just calling the update api from web_token_api
-    deleteVideogame (sessionStorage.updateModelKey); //borra primero
-    addVideogame () //después agregalo con o sin cambios
+    addVideogame ();
 
-    GoBack();
+    //we could also try just calling the update api from web_token_api
+    deleteVideogame (sessionStorage.updateModelKey);
+    
 }
 
 //borra el videojuego con la clave dada
@@ -184,8 +185,7 @@ function deleteVideogame(theKey)
 {
     //alert("token: " + sessionStorage.token + ", entityKey: " + theKey);
 
-    var myData = new KeyObject(sessionStorage.updateModelKey);
-
+    var myData = new KeyObject(theKey);
 
     jQuery.support.cors = true;
     try
@@ -209,6 +209,8 @@ function deleteVideogame(theKey)
     {
       alert("error : " +  e);
     }
+
+    GoBack(); //as update to see changes
 }
 
 //Sets the selected image as preview
