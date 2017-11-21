@@ -247,6 +247,21 @@ class LoginHandler(webapp2.RequestHandler):
     template = jinja_env.get_template(template_name)
     return template.render(context)
 
+class SignupHandler(webapp2.RequestHandler):
+
+   def get(self):
+
+    template_context = {}
+    self.response.out.write(
+      self._render_template('signup.html', template_context))
+
+   def _render_template(self, template_name, context=None):
+    if context is None:
+     context = {}
+
+    template = jinja_env.get_template(template_name)
+    return template.render(context)
+
 
 class TweetHandler(webapp2.RequestHandler):
 
@@ -402,6 +417,7 @@ class MainHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/login', LoginHandler),
+    ('/signup', SignupHandler),
     ('/tweets', TweetHandler),
     ('/up', UpHandler),
     ('/videogames', VideogameHandler),
