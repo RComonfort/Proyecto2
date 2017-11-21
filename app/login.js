@@ -39,3 +39,15 @@ function loginDemo()
      });
 
 }
+
+function logout()
+{
+    sessionStorage.removeItem('user');
+    sessionStorage.removeItem('token');
+    window.location = "/"; //as update 
+}
+
+function signUp()
+{
+
+}

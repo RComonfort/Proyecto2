@@ -25,40 +25,47 @@ function KeyObject(f1) {
 
 function addGenre()
 {
-	try
-  {
-    //alert("token : " + sessionStorage.token);
+    if ("user" in sessionStorage)
+    {
+        try
+        {
+            //alert("token : " + sessionStorage.token);
 
-  	var myData = new GenreObject(
-     $("#name_gen").val(), 
-     $("#description_gen").val()
-     );
-  	alert(myData.toJsonString());
+            var myData = new GenreObject(
+            $("#name_gen").val(), 
+            $("#description_gen").val()
+            );
+            alert(myData.toJsonString());
 
-  	 jQuery.ajax({
-           type: "POST",
-           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/insert",
-           data: myData.toJsonString(),
-           contentType: "application/json; charset=utf-8",
-           dataType: "json",
-           success: function (response) {
-                // do something
-                alert (response.code + " " + response.message);
-           },
-       
-           error: function (error) {            
-                // error handler
-                alert("error :" + error.message)
-           }
+            jQuery.ajax({
+                type: "POST",
+                url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/genres_api/v1/genres/insert",
+                data: myData.toJsonString(),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                        // do something
+                        alert (response.code + " " + response.message);
+                },
+            
+                error: function (error) {            
+                        // error handler
+                        alert("error :" + error.message)
+                }
 
-       });
+            });
 
-   }
-   catch(error)
-   {
-    alert(error);
-   }
-
+        }
+        catch(error)
+        {
+            alert(error);
+        }
+    }
+    else
+    {
+       alert("No puedes agregar sin haber iniciado sesión");
+       GoBack();
+    }
 }
 
 

@@ -32,44 +32,52 @@ function KeyObject(f1) {
 
 function addVideogame()
 {
-	try
-  {
-    //alert("token : " + sessionStorage.token);
-
-  	var myData = new VideogameObject(
-     $("#title_vg").val(), 
-     $("#developer_vg").val(),
-     $("#publisher_vg").val(),
-     $("#year_vg").val(),
-     $("#description_vg").val(),
-     $("#genre_vg").val()  
-     );
-  	alert(myData.toJsonString());
-
-  	 jQuery.ajax({
-           type: "POST",
-           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/insert",
-           data: myData.toJsonString(),
-           contentType: "application/json; charset=utf-8",
-           dataType: "json",
-           success: function (response) {
-                // do something
-                alert (response.code + " " + response.message);
-           },
-       
-           error: function (error) {            
-                // error handler
-                alert("error :" + error.message)
-           }
-
-       });
-
-   }
-   catch(error)
-   {
-    alert(error);
-   }
-
+    //solo los que inicien sesión pueden ver agregar modelos
+    if ("user" in sessionStorage)
+    {
+        try
+        {
+            //alert("token : " + sessionStorage.token);
+        
+            var myData = new VideogameObject(
+            $("#title_vg").val(), 
+            $("#developer_vg").val(),
+            $("#publisher_vg").val(),
+            $("#year_vg").val(),
+            $("#description_vg").val(),
+            $("#genre_vg").val()  
+            );
+            alert(myData.toJsonString());
+        
+                jQuery.ajax({
+                    type: "POST",
+                    url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/videogames_api/v1/videogames/insert",
+                    data: myData.toJsonString(),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (response) {
+                        // do something
+                        alert (response.code + " " + response.message);
+                    },
+                
+                    error: function (error) {            
+                        // error handler
+                        alert("error :" + error.message)
+                    }
+        
+                });
+        
+            }
+        catch(error)
+        {
+            alert(error);
+        }
+    }
+    else
+    {
+       alert("No puedes agregar sin haber iniciado sesión");
+       GoBack();
+    }
 }
 
 
@@ -196,7 +204,7 @@ function deleteVideogame(theKey)
             data: myData.toJsonString(),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            success: function (response) { //si no funciona, quizas se deba recorrer como arreglo, tal como se hace en getpublicdata.js?
+            success: function (response) {
                  alert (response.message);
             },
             error: function (error) {            

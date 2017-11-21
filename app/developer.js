@@ -31,41 +31,48 @@ function KeyObject(f1) {
 
 function addDeveloper()
 {
-	try
-  {
-    //alert("token : " + sessionStorage.token);
-
-  	var myData = new DeveloperObject(
-     $("#name_dev").val(), 
-     $("#location_dev").val(),
-     $("#year_dev").val() 
-     );
-  	alert(myData.toJsonString());
-
-  	 jQuery.ajax({
-           type: "POST",
-           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/insert",
-           data: myData.toJsonString(),
-           contentType: "application/json; charset=utf-8",
-           dataType: "json",
-           success: function (response) {
-                // do something
-                alert (response.code + " " + response.message);
-           },
-       
-           error: function (error) {            
-                // error handler
-                alert("error :" + error.message)
-           }
-
-       });
-
-   }
-   catch(error)
-   {
-    alert(error);
-   }
-
+    if ("user" in sessionStorage)
+    {
+        try
+        {
+            //alert("token : " + sessionStorage.token);
+    
+            var myData = new DeveloperObject(
+            $("#name_dev").val(), 
+            $("#location_dev").val(),
+            $("#year_dev").val() 
+            );
+            alert(myData.toJsonString());
+    
+            jQuery.ajax({
+                type: "POST",
+                url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/developers_api/v1/developers/insert",
+                data: myData.toJsonString(),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                        // do something
+                        alert (response.code + " " + response.message);
+                },
+            
+                error: function (error) {            
+                        // error handler
+                        alert("error :" + error.message)
+                }
+    
+            });
+    
+        }
+        catch(error)
+        {
+            alert(error);
+        }
+    }
+    else
+    {
+       alert("No puedes agregar sin haber iniciado sesión");
+       GoBack();
+    } 
 }
 
 function getDeveloperList()

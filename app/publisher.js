@@ -28,43 +28,49 @@ function KeyObject(f1) {
 
 function addPublisher()
 {
-	try
-  {
-    //alert("token : " + sessionStorage.token);
-
-  	var myData = new PublisherObject(
-     $("#name_pub").val(), 
-     $("#location_pub").val(),
-     $("#year_pub").val() 
-     );
-  	alert(myData.toJsonString());
-
-  	 jQuery.ajax({
-           type: "POST",
-           url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/publishers_api/v1/publishers/insert",
-           data: myData.toJsonString(),
-           contentType: "application/json; charset=utf-8",
-           dataType: "json",
-           success: function (response) {
-                // do something
-                alert (response.code + " " + response.message);
-           },
-       
-           error: function (error) {            
-                // error handler
-                alert("error :" + error.message)
-           }
-
-       });
-
-   }
-   catch(error)
-   {
-    alert(error);
-   }
-
+    if ("user" in sessionStorage)
+    {
+        try
+        {
+            //alert("token : " + sessionStorage.token);
+    
+            var myData = new PublisherObject(
+            $("#name_pub").val(), 
+            $("#location_pub").val(),
+            $("#year_pub").val() 
+            );
+            alert(myData.toJsonString());
+    
+            jQuery.ajax({
+                type: "POST",
+                url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/publishers_api/v1/publishers/insert",
+                data: myData.toJsonString(),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                        // do something
+                        alert (response.code + " " + response.message);
+                },
+            
+                error: function (error) {            
+                        // error handler
+                        alert("error :" + error.message)
+                }
+    
+            });
+    
+        }
+        catch(error)
+        {
+            alert(error);
+        }
+    }
+    else
+    {
+       alert("No puedes agregar sin haber iniciado sesión");
+       GoBack();
+    }
 }
-
 
 function getPublisherList()
 {
