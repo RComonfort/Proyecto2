@@ -36,9 +36,6 @@ class CodeMessage(messages.Message):
     code = messages.IntegerField(1)
     message = messages.StringField(2)
 
-
-
-
 #USERS
 class UserInput(messages.Message):
     token = messages.StringField(1) 

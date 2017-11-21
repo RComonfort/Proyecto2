@@ -6,6 +6,16 @@ function LoginObject(myEmail, myPasswd) {
 
 };
 
+function UserAddObject(myEmail, myPasswd) {
+    this.email = myEmail;
+	this.password = myPasswd;
+	
+	this.token = sessionStorage.token;
+    this.empresa_key = "5629499534213120"; //hard coded bby
+    this.toJsonString = function () { return JSON.stringify(this); };
+
+};
+
 function loginDemo()
 {
 	//alert("testing...")
@@ -13,7 +23,7 @@ function loginDemo()
     $("#email").val(), 
     $("#passwd").val());
 	
-  alert(myData.toJsonString());
+    alert(myData.toJsonString());
 
 	 jQuery.ajax({
          type: "POST",
@@ -33,11 +43,10 @@ function loginDemo()
      
          error: function (error) {            
               // error handler
-              alert(error)
+              alert("error: " +error)
          }
 
      });
-
 }
 
 function logout()
@@ -49,5 +58,29 @@ function logout()
 
 function signUp()
 {
+    var myData = new UserAddObject(
+        $("#email").val(), 
+        $("#passwd").val());
 
+    //alert(myData.toJsonString());
+    
+    jQuery.ajax({
+        type: "POST",
+        url: "https://proyecto2-rafaelantoniocomonfo.appspot.com/_ah/api/usuarios_api/v1/users/insert",
+        data: myData.toJsonString(),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (response) {
+            // do something
+            alert (response.message);
+            window.location = "/login";
+        },
+    
+        error: function (error) {            
+            // error handler
+            alert("error: " + error.message);
+            window.location = "/";
+        }
+
+    });
 }
