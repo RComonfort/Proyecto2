@@ -11,7 +11,7 @@ function UserAddObject(myEmail, myPasswd) {
 	this.password = myPasswd;
 	
 	this.token = sessionStorage.token;
-    this.empresa_key = "5629499534213120"; //hard coded bby
+    //this.empresa_key = "5629499534213120"; //hard coded
     this.toJsonString = function () { return JSON.stringify(this); };
 
 };
@@ -62,7 +62,7 @@ function signUp()
         $("#email").val(), 
         $("#passwd").val());
 
-    //alert(myData.toJsonString());
+    alert(myData.toJsonString());
     
     jQuery.ajax({
         type: "POST",
@@ -78,7 +78,7 @@ function signUp()
     
         error: function (error) {            
             // error handler
-            alert("error: " + error.message);
+            alert("error in sing up: " + error.message);
             window.location = "/";
         }
 
